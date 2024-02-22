@@ -12,7 +12,7 @@ atomic_tests:
   - description: |
       AutoIt is required
     prereq_command: |
-      if(Test-Path #{autoit_path}) {
+      if(Test-Path "#{autoit_path}") {
           Write-Host "AutoIt is installed."
           exit 0
       } else {
@@ -38,5 +38,5 @@ atomic_tests:
       default: C:\Program Files (x86)\AutoIt3\AutoIt3.exe
   executor:
     command: |
-      Start-Process -FilePath #{autoit_path} -ArgumentList #{script_path}
+      Start-Process -FilePath "#{autoit_path}" -ArgumentList "#{script_path}"
     name: powershell
