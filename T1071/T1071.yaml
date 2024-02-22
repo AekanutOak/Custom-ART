@@ -15,10 +15,10 @@ atomic_tests:
       $connection = Test-NetConnection -ComputerName #{server_ip} -Port #{server_port}
 
       if ($connection.TcpTestSucceeded) {
-          Write-Output "Port #{server_port} is open."
+          Write-Output "#{server_ip} Port #{server_port} is reachable."
           exit 0
       } else {
-          Write-Output "Port #{server_port} is closed or unreachable."
+          Write-Output "#{server_ip} Port #{server_port} is unreachable."
           exit 1
       }
 
