@@ -21,6 +21,9 @@ atomic_tests:
           Write-Output "Port #{server_port} is closed or unreachable."
           exit 1
       }
+
+    get_prereq_command: |
+      Write-Host "Setup C2 server manually"
   input_arguments:
     server_ip:
       description: C2 server IP or URL
