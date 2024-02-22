@@ -1,1 +1,42 @@
-T
+attack_technique: T1059
+display_name: 'Command and Scripting Interpreter'
+atomic_tests:
+- name: AutoIt Script
+  auto_generated_guid: a9b93f17-31cb-435d-a462-5e838a2a6026
+  description: |
+    Invoke a malicious-like AutoIt script to open the calculator.
+  supported_platforms:
+  - windows
+  dependency_executor_name: powershell
+  dependencies:
+  - description: |
+      AutoIt is required
+    prereq_command: |
+      if(Test-Path #{autoit_path}) {
+          Write-Host "AutoIt is installed."
+          exit 0
+      } else {
+          Write-Host "AutoIt is not installed."
+          exit 1
+      }
+    get_prereq_command: |
+      $AutoItURL = "https://www.autoitscript.com/cgi-bin/getfile.pl?autoit3/autoit-v3-setup.exe"
+      $InstallerPath = "$env:TEMP\autoit-v3-setup.exe"
+      if(-not (Test-Path "#{autoit_path}")) {
+          Invoke-WebRequest -Uri $AutoItURL -OutFile $InstallerPath
+          Start-Process -FilePath $InstallerPath -ArgumentList "/S" -Wait
+          Remove-Item $InstallerPath
+      }
+  input_arguments:
+    script_path:
+      description: au3 script path
+      type: path
+      default: PathToAtomicsFolder\T1059\src\calc.au3
+    autoit_path:
+      description: autoit.exe path
+      type: path
+      default: C:\Program Files (x86)\AutoIt3\AutoIt3.exe
+  executor:
+    command: |
+      Start-Process -FilePath #{autoit_path} -ArgumentList #{script_path}
+    name: powershell
