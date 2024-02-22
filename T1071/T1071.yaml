@@ -39,5 +39,5 @@ atomic_tests:
       default: 23
   executor:
     command: |
-      .\#{client_path} #{server_ip} --port #{server_port}
+      #{client_path} #{server_ip} --port #{server_port}
     name: powershell
