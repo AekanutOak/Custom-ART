@@ -10,7 +10,7 @@ atomic_tests:
   dependency_executor_name: powershell
   dependencies:
   - description: |
-      AutoIt is required
+      AutoIt executable file must exist on disk at the specified location (#{autoit_path})
     prereq_command: |
       if(Test-Path "#{autoit_path}") {
           exit 0
@@ -25,11 +25,11 @@ atomic_tests:
       Start-Process -FilePath $InstallerPath -ArgumentList "/S" -Wait
   input_arguments:
     script_path:
-      description: au3 script path
+      description: AutoIt Script Path
       type: path
       default: PathToAtomicsFolder\T1059\src\calc.au3
     autoit_path:
-      description: autoit.exe path
+      description: AutoIt Executable File Path
       type: path
       default: C:\Program Files (x86)\AutoIt3\AutoIt3.exe
   executor:
