@@ -10,7 +10,7 @@ atomic_tests:
   dependency_executor_name: powershell
   dependencies:
   - description: |
-      Command and Control (C2) server established by PathToAtomicsFolder\T1071\bin\telnet_server.exe with given IP must be reachable by client (telnet_client.exe)
+      Command and Control (C2) server cam be established by running PathToAtomicsFolder\T1071\bin\telnet_server.exe on specified server with specified IP that must be reachable by client (telnet_client.exe)
     prereq_command: |
       $connection = Test-NetConnection -ComputerName #{server_ip} -Port #{server_port}
       if ($connection.TcpTestSucceeded) {exit 0} else {exit 1}
